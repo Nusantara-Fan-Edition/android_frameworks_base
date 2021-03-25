@@ -23,7 +23,6 @@ import android.content.pm.ActivityInfo.Config;
 import android.content.res.Resources.Theme;
 import android.content.res.Resources.ThemeKey;
 import android.util.LongSparseArray;
-import android.util.ArrayMap;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
