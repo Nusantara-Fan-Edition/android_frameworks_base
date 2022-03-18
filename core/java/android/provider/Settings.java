@@ -6796,7 +6796,7 @@ public final class Settings {
          * @hide
          */
         public static final String FORCE_EXPANDED_NOTIFICATIONS = "force_expanded_notifications";
-
+        
         /**
          * @hide
          */
@@ -10417,6 +10417,12 @@ public final class Settings {
          * @hide
          */
         public static final String DOZE_PULSE_ON_LONG_PRESS = "doze_pulse_on_long_press";
+        
+         /**
+         * Control whether FLAG_SECURE is ignored for all windows.
+         * @hide
+         */
+        public static final String WINDOW_IGNORE_SECURE = "window_ignore_secure";
 
         /**
          * Whether the device should pulse on double tap gesture.
