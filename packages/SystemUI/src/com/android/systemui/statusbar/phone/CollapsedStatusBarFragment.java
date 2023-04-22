@@ -265,7 +265,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     private void updateStatusBarClock() {
         if (mShowSBClockBg != 0) {
-            String chipStyleUri = "sb_date_bg" + String.valueOf(mShowSBClockBg);
+            String chipStyleUri = "sb_qs_date_bg" + String.valueOf(mShowSBClockBg);
             int resId = getContext().getResources().getIdentifier(chipStyleUri, "drawable", "com.android.systemui");
             mClockView.setBackgroundResource(resId);
             mClockView.setPadding(12,2,12,4);
