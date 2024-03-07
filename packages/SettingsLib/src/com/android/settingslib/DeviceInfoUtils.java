@@ -208,4 +208,20 @@ public class DeviceInfoUtils {
         return sb.toString();
     }
 
+   public static String getCustomPatch() {
+        String customPatch = SystemProperties.get("ro.nad.custom_version");
+        if (!"".equals(customPatch)) {
+            try {
+                SimpleDateFormat template = new SimpleDateFormat("yyyy-MM-dd");
+                Date patchDate = template.parse(customPatch);
+                String format = DateFormat.getBestDateTimePattern(Locale.getDefault(), "dMMMMyyyy");
+                customPatch = DateFormat.format(format, patchDate).toString();
+            } catch (ParseException e) {
+                // broken parse; fall through and use the raw string
+            }
+            return customPatch;
+        } else {
+            return null;
+        }
+    }
 }
