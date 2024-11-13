@@ -494,7 +494,7 @@ class AppErrors {
                 return;
             }
 
-            // Add paste content for Hastebin option
+            // Add paste content for pasty option
             data.paste = "time: " + timeMillis + "\n" +
             "msg: " + longMsg + "\n" +
             "stacktrace: " + stackTrace;
