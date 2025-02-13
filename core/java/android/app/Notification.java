@@ -6208,7 +6208,7 @@ public class Notification implements Parcelable
         if (extras.getBoolean(EXTRA_REDUCED_IMAGES)) {
             return;
         }
-        boolean isLowRam = ActivityManager.isLowRamDeviceStatic();
+        boolean isLowRam = true;
         if (mLargeIcon != null || largeIcon != null) {
             Resources resources = context.getResources();
             Class<? extends Style> style = getNotificationStyle();
@@ -6720,7 +6720,7 @@ public class Notification implements Parcelable
         public void reduceImageSizes(Context context) {
             super.reduceImageSizes(context);
             Resources resources = context.getResources();
-            boolean isLowRam = ActivityManager.isLowRamDeviceStatic();
+            boolean isLowRam = true;
             if (mPicture != null) {
                 int maxPictureWidth = resources.getDimensionPixelSize(isLowRam
                         ? R.dimen.notification_big_picture_max_height_low_ram
