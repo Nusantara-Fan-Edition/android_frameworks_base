@@ -67,7 +67,7 @@ public class NotificationInlineImageResolver implements ImageResolver {
      * @return True if has its internal cache, false otherwise.
      */
     public boolean hasCache() {
-        return mImageCache != null && !ActivityManager.isLowRamDeviceStatic();
+        return false;
     }
 
     /**
