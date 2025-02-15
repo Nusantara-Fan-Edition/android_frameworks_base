@@ -75,6 +75,9 @@ public class UserManager {
     private final IUserManager mService;
     private final Context mContext;
 
+    /** The userId of the constructor param context. To be used instead of mContext.getUserId(). */
+    private final @UserIdInt int mUserId;
+
     private Boolean mIsManagedProfileCached;
 
     /**
@@ -1250,6 +1253,7 @@ public class UserManager {
     public UserManager(Context context, IUserManager service) {
         mService = service;
         mContext = context.getApplicationContext();
+        mUserId = context.getUserId();
     }
 
     /**
@@ -1561,6 +1565,16 @@ public class UserManager {
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
         }
+    }
+
+    /**
+     * Checks if the calling context user is running in a profile.
+     *
+     * @return whether the caller is in a profile.
+     * @hide
+     */
+    public boolean isProfile() {
+        return getProfileParent(mUserId) != null;
     }
 
     /**
