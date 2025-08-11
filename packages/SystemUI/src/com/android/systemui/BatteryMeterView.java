@@ -65,6 +65,7 @@ import com.android.settingslib.graph.LandscapeBatteryDrawableiOS16;
 import com.android.settingslib.graph.LandscapeBatteryDrawableColorOS;
 import com.android.settingslib.graph.LandscapeRBatteryDrawableColorOS;
 import com.android.settingslib.graph.LandscapeBatteryDrawableMIUIPill;
+import com.android.settingslib.graph.LandscapeBatteryDrawableONEUI7;
 
 import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.plugins.DarkIconDispatcher.DarkReceiver;
@@ -106,6 +107,7 @@ public class BatteryMeterView extends LinearLayout implements
     private static final int BATTERY_STYLE_LANDSCAPE_COLOROS = 16;
     private static final int BATTERY_STYLE_RLANDSCAPE_COLOROS = 17;
     private static final int BATTERY_STYLE_LANDSCAPE_MIUIPill = 18;
+    private static final int BATTERY_STYLE_LANDSCAPE_ONEUI7 = 19;
     
     private static final int BATTERY_STYLE_CIRCLE = 9;
     private static final int BATTERY_STYLE_DOTTED_CIRCLE = 10;
@@ -133,6 +135,7 @@ public class BatteryMeterView extends LinearLayout implements
     
     private final LandscapeBatteryDrawableColorOS mLandscapeDrawableColorOS;
     private final LandscapeBatteryDrawableMIUIPill mLandscapeDrawableMIUIPill;
+    private final LandscapeBatteryDrawableONEUI7 mLandscapeDrawableONEUI7;
     private final LandscapeRBatteryDrawableColorOS mRLandscapeDrawableColorOS;
     
     private final String mSlotBattery;
@@ -196,6 +199,7 @@ public class BatteryMeterView extends LinearLayout implements
         
         mLandscapeDrawableColorOS = new LandscapeBatteryDrawableColorOS(context, frameColor);
         mLandscapeDrawableMIUIPill = new LandscapeBatteryDrawableMIUIPill(context, frameColor);
+        mLandscapeDrawableONEUI7 = new LandscapeBatteryDrawableONEUI7(context, frameColor);
         mRLandscapeDrawableColorOS = new LandscapeRBatteryDrawableColorOS(context, frameColor);
         
         mCircleDrawable = new CircleBatteryDrawable(context, frameColor);
@@ -388,6 +392,7 @@ public class BatteryMeterView extends LinearLayout implements
             
             mLandscapeDrawableColorOS.setBatteryLevel(mLevel);
             mLandscapeDrawableMIUIPill.setBatteryLevel(mLevel);
+            mLandscapeDrawableONEUI7.setBatteryLevel(mLevel);
             mRLandscapeDrawableColorOS.setBatteryLevel(mLevel);
             
             mCircleDrawable.setBatteryLevel(mLevel);
@@ -407,6 +412,7 @@ public class BatteryMeterView extends LinearLayout implements
             
             mLandscapeDrawableColorOS.setCharging(mCharging);
             mLandscapeDrawableMIUIPill.setCharging(mCharging);
+            mLandscapeDrawableONEUI7.setCharging(mCharging);
             mRLandscapeDrawableColorOS.setCharging(mCharging);
             
             mCircleDrawable.setCharging(mCharging);
@@ -431,6 +437,7 @@ public class BatteryMeterView extends LinearLayout implements
         
         mLandscapeDrawableColorOS.setPowerSaveEnabled(isPowerSave);
         mLandscapeDrawableMIUIPill.setPowerSaveEnabled(isPowerSave);
+        mLandscapeDrawableONEUI7.setPowerSaveEnabled(isPowerSave);
         mRLandscapeDrawableColorOS.setPowerSaveEnabled(isPowerSave);
         
         mCircleDrawable.setPowerSaveEnabled(isPowerSave);
@@ -521,6 +528,7 @@ public class BatteryMeterView extends LinearLayout implements
             
             mLandscapeDrawableColorOS.setShowPercent(false);
             mLandscapeDrawableMIUIPill.setShowPercent(false);
+            mLandscapeDrawableONEUI7.setShowPercent(false);
             mRLandscapeDrawableColorOS.setShowPercent(false);
             
             mCircleDrawable.setShowPercent(false);
@@ -557,6 +565,7 @@ public class BatteryMeterView extends LinearLayout implements
             
             mLandscapeDrawableColorOS.setShowPercent(drawPercentInside);
             mLandscapeDrawableMIUIPill.setShowPercent(drawPercentInside);
+            mLandscapeDrawableONEUI7.setShowPercent(drawPercentInside);
             mRLandscapeDrawableColorOS.setShowPercent(drawPercentInside);
             
             mCircleDrawable.setShowPercent(drawPercentInside);
@@ -641,6 +650,9 @@ public class BatteryMeterView extends LinearLayout implements
         } else if (mBatteryStyle == BATTERY_STYLE_LANDSCAPE_MIUIPill) {
             batteryWidth = res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_width_height_miuipill);
             batteryHeight = res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_width_height_miuipill);
+        } else if (mBatteryStyle == BATTERY_STYLE_LANDSCAPE_ONEUI7) {
+            batteryWidth = res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_width_landscape_oneui7);
+            batteryHeight = res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_height_landscape_oneui7);
         } else if (mBatteryStyle == BATTERY_STYLE_LANDSCAPE_iOS_15) {
             batteryWidth = res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_width_landscape_ios_15);
             batteryHeight = res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_height_landscape_ios_15);
@@ -710,6 +722,9 @@ public class BatteryMeterView extends LinearLayout implements
             case BATTERY_STYLE_LANDSCAPE_MIUIPill:
             mBatteryIconView.setImageDrawable(mLandscapeDrawableMIUIPill);
             break;
+            case BATTERY_STYLE_LANDSCAPE_ONEUI7:
+            mBatteryIconView.setImageDrawable(mLandscapeDrawableONEUI7);
+            break;
             
             case BATTERY_STYLE_FULL_CIRCLE:
             mBatteryIconView.setImageDrawable(mFullCircleDrawable);
@@ -747,6 +762,7 @@ public class BatteryMeterView extends LinearLayout implements
         
         mLandscapeDrawableColorOS.setColors(foregroundColor, backgroundColor, singleToneColor);
         mLandscapeDrawableMIUIPill.setColors(foregroundColor, backgroundColor, singleToneColor);
+        mLandscapeDrawableONEUI7.setColors(foregroundColor, backgroundColor, singleToneColor);
         mRLandscapeDrawableColorOS.setColors(foregroundColor, backgroundColor, singleToneColor);
         
         mCircleDrawable.setColors(foregroundColor, backgroundColor, singleToneColor);
