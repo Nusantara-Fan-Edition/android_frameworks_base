@@ -2575,6 +2575,8 @@ public class NotificationPanelView extends PanelView implements
     protected void onTrackingStarted() {
         mFalsingManager.onTrackingStarted(mStatusBar.isKeyguardCurrentlySecure());
         super.onTrackingStarted();
+        // Defer heavy notification layout updates while panel is being dragged
+        mNotificationStackScroller.setPanelTracking(true);
         if (mQsFullyExpanded) {
             mQsExpandImmediate = true;
             mNotificationStackScroller.setShouldShowShelfOnly(true);
@@ -2590,6 +2592,8 @@ public class NotificationPanelView extends PanelView implements
     protected void onTrackingStopped(boolean expand) {
         mFalsingManager.onTrackingStopped();
         super.onTrackingStopped(expand);
+        // Resume deferred notification layout updates after drag ends
+        mNotificationStackScroller.setPanelTracking(false);
         if (expand) {
             mNotificationStackScroller.setOverScrolledPixels(
                     0.0f, true /* onTop */, true /* animate */);
@@ -3713,6 +3717,10 @@ public class NotificationPanelView extends PanelView implements
     }
 
     public void updateNotificationViews() {
+        // Avoid heavy notification updates while user is actively scrolling the panel
+        if (mTracking) {
+            return;
+        }
         mNotificationStackScroller.updateSectionBoundaries();
         mNotificationStackScroller.updateSpeedBumpIndex();
         mNotificationStackScroller.updateFooter();

@@ -1311,6 +1311,10 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
 
     @ShadeViewRefactor(RefactorComponent.STATE_RESOLVER)
     private void requestChildrenUpdate() {
+        // Avoid heavy layout passes while panel is being dragged
+        if (mPanelTracking) {
+            return;
+        }
         if (!mChildrenUpdateRequested) {
             getViewTreeObserver().addOnPreDrawListener(mChildrenUpdater);
             mChildrenUpdateRequested = true;
@@ -5266,6 +5270,15 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
         mQsExpanded = qsExpanded;
         updateAlgorithmLayoutMinHeight();
         updateScrollability();
+    }
+
+    public void setPanelTracking(boolean tracking) {
+        if (mPanelTracking != tracking) {
+            mPanelTracking = tracking;
+            if (!tracking) {
+                requestChildrenUpdate();
+            }
+        }
     }
 
     @ShadeViewRefactor(RefactorComponent.SHADE_VIEW)
