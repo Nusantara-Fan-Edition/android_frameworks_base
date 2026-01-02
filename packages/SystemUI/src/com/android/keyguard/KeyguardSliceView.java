@@ -691,7 +691,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
      * Representation of an item that appears under the clock on main keyguard message.
      */
     @VisibleForTesting
-    static class KeyguardSliceButton extends Button implements
+    public static class KeyguardSliceButton extends Button implements
             ConfigurationController.ConfigurationListener {
 
         @StyleRes

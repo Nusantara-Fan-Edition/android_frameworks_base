@@ -898,7 +898,7 @@ public class NotificationPanelView extends PanelView implements
             int clockPreferredY = mKeyguardStatusView.getClockPreferredY(totalHeight);
             boolean bypassEnabled = mKeyguardBypassController.getBypassEnabled();
             final boolean hasVisibleNotifications =
-                    !bypassEnabled && mNotificationStackScroller.getVisibleNotificationCount() != 0;
+                    !bypassEnabled && mNotificationStackScroller.isVisibleNotification();
             mKeyguardStatusView.setHasVisibleNotifications(hasVisibleNotifications);
             mClockPositionAlgorithm.setup(
                     mStatusBarMinHeight,
